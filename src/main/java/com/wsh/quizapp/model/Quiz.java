@@ -12,16 +12,22 @@ import java.util.Objects;
 @Setter
 @ToString
 @RequiredArgsConstructor
+@NoArgsConstructor
 public class Quiz {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
+
+    @NonNull
     private String category;
+
+    @NonNull
     private String title;
 
     @ManyToMany
     @ToString.Exclude
+    @NonNull
     private List<Question> questions;
 
     @Override
@@ -38,5 +44,9 @@ public class Quiz {
     @Override
     public final int hashCode() {
         return this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass().hashCode() : getClass().hashCode();
+    }
+
+    public Integer getTotalPoints() {
+        return questions.stream().mapToInt(Question::getPoints).sum();
     }
 }

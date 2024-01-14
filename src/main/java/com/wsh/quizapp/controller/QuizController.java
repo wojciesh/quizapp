@@ -1,6 +1,8 @@
 package com.wsh.quizapp.controller;
 
 import com.wsh.quizapp.model.QuestionWrapper;
+import com.wsh.quizapp.model.Response;
+import com.wsh.quizapp.model.Score;
 import com.wsh.quizapp.service.QuizService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -26,5 +28,11 @@ public class QuizController {
     public ResponseEntity<List<QuestionWrapper>> getQuizQuestions(@PathVariable Integer id) {
         return quizService.getQuizQuestions(id);
     }
+
+    @PostMapping("submit/{id}")
+    public ResponseEntity<Score> submitQuiz(@PathVariable Integer id, @RequestBody List<Response> responses) {
+        return quizService.calculateResult(id, responses);
+    }
+
 
 }

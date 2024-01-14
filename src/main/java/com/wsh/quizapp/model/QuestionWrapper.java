@@ -1,27 +1,32 @@
 package com.wsh.quizapp.model;
 
 import lombok.Data;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 import java.util.List;
 
 @Data
+@RequiredArgsConstructor
 public class QuestionWrapper {
 
+        @NonNull
         private Integer id;
-        private String questionTitle;
-        private String option1;
-        private String option2;
-        private String option3;
-        private String option4;
 
-        public QuestionWrapper(Integer id, String questionTitle, String option1, String option2, String option3, String option4) {
-                this.id = id;
-                this.questionTitle = questionTitle;
-                this.option1 = option1;
-                this.option2 = option2;
-                this.option3 = option3;
-                this.option4 = option4;
-        }
+        @NonNull
+        private String questionTitle;
+
+        @NonNull
+        private String option1;
+
+        @NonNull
+        private String option2;
+
+        @NonNull
+        private String option3;
+
+        @NonNull
+        private String option4;
 
         public static List<QuestionWrapper> wrapQuestions(List<Question> questions) {
                 return questions.stream().map(
